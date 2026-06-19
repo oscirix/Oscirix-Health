@@ -1,0 +1,4 @@
+﻿:host { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+.sidebar { background: #06153a; color: white; display: flex; flex-direction: column; gap: 16px; padding: 24px; }
+.sidebar a { color: white; text-decoration: none; }
+.dashboard-content { background: #f7f8fb; }
