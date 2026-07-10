@@ -77,7 +77,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::patch('documents/{patient_document}', [PatientDocumentController::class, 'update']);
     Route::delete('documents/{patient_document}', [PatientDocumentController::class, 'destroy']);
     Route::apiResource('appointments', AppointmentController::class)->only(['index', 'store', 'update']);
-    Route::apiResource('leads', LeadController::class)->only(['index', 'update']);
+    Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
     Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
 });

@@ -18,6 +18,34 @@ class LeadController extends Controller
         return response()->json($leads, 200);
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:160',
+            'whatsapp_phone' => 'nullable|string|max:40',
+            'phone_extension' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:150',
+            'treatment_id' => 'nullable|string|size:36',
+            'chat_summary' => 'nullable|string',
+            'status' => 'nullable|in:new,qualified,converted,lost',
+            'converted_patient_id' => 'nullable|string|size:36',
+            'converted_appointment_id' => 'nullable|string|size:36',
+        ]);
+
+        // Asignamos automáticamente el clinic_id del usuario logueado
+        $validated['clinic_id'] = $request->user()->clinic_id;
+
+        $lead = new Lead();
+        $lead->fill($validated);
+        $lead->save();
+
+        return response()->json([
+            'message' => 'Lead creado exitosamente.',
+            'lead' => $lead
+        ], 201);
+    }
+
+
     // Actualizar un lead existente
     public function update(Request $request, Lead $lead)
     {
