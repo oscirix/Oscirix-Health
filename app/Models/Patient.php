@@ -14,7 +14,7 @@ class Patient extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    // Campos masivos basados en las columnas reales que se ven en tu phpMyAdmin
+    // Campos en las columnas reales
     protected $fillable = [
         'id',
         'clinic_id',

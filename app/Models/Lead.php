@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lead extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
 
-    protected $guarded = [];
+    protected $table = 'leads'; // Nombre exacto de la tabla en phpMyAdmin
+
+    protected $guarded = []; // Permite guardar todos los campos definidos en la migración/base
 }
-
