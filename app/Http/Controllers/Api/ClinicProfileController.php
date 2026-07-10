@@ -11,11 +11,13 @@ class ClinicProfileController extends Controller
     // Mostrar la información del perfil clínico único
     public function show()
     {
-        // Al ser un perfil único para V2, tomamos el primer registro de la tabla
         $profile = ClinicProfile::first();
 
+        // Si aún no hay registros, devolvemos un JSON vacío en lugar de romper la app
         if (!$profile) {
-            return response()->json(['message' => 'Perfil clínico no encontrado.'], 404);
+            return response()->json([
+                'message' => 'Aún no hay perfil clínico registrado. Usa PUT para crearlo.'
+            ], 200);
         }
 
         return response()->json($profile, 200);

@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClinicProfile extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    // Indicamos el nombre exacto de la tabla en MySQL
+    protected $table = 'clinic_profile';
 
     protected $guarded = [];
 }
-
