@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\PatientDocumentController;
 use App\Http\Controllers\Api\PrescriptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TreatmentController;
+use App\Http\Controllers\Api\ClinicProfileController;
 
 // ==========================================
 // 1. RUTAS PÚBLICAS (No requieren Login)
@@ -41,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('patients', PatientController::class)->only(['index', 'store', 'show', 'update']);
     Route::get('patients/{patient}/summary', [PatientController::class, 'summary']);
     Route::get('patients/{patient}/alerts', [PatientController::class, 'alerts']);
+    Route::get('clinic-profile', [ClinicProfileController::class, 'show']);
+    Route::put('clinic-profile', [ClinicProfileController::class, 'update']);
     Route::get('patients/{patient}/clinical-records', [ClinicalRecordController::class, 'index']);
     Route::post('patients/{patient}/clinical-records', [ClinicalRecordController::class, 'store']);
     Route::get('clinical-records/{clinical_record}', [ClinicalRecordController::class, 'show']);
@@ -82,5 +85,5 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
     Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
     Route::apiResource('treatments', TreatmentController::class);
-    
+
 });
