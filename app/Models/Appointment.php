@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'appointments';
 
     protected $guarded = [];
 }
-
