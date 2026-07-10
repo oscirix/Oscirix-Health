@@ -30,6 +30,9 @@ class TreatmentController extends Controller
             'is_active' => 'boolean',
         ]);
 
+        // Asignamos el clinic_id del usuario autenticado para satisfacer la base de datos
+        $validated['clinic_id'] = $request->user()->clinic_id;
+
         $treatment = new Treatment();
         $treatment->fill($validated);
         $treatment->save();
