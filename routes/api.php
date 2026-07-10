@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\PatientDocumentController;
 use App\Http\Controllers\Api\PrescriptionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TreatmentController;
 
 // ==========================================
 // 1. RUTAS PÚBLICAS (No requieren Login)
@@ -80,4 +81,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
     Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
+    Route::apiResource('treatments', TreatmentController::class);
+    
 });
