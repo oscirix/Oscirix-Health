@@ -84,7 +84,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('appointments', AppointmentController::class)->only(['index', 'store', 'update']);
     Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
-    Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
+    Route::put('clinic/settings', [ClinicSettingsController::class, 'update']);
     Route::apiResource('treatments', TreatmentController::class);
 
     Route::apiResource('testimonials', TestimonialController::class);
