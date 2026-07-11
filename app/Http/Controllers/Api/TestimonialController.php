@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {
-    // Listar testimonios (filtrando los activos para la landing)
     public function index(Request $request)
     {
         $testimonials = Testimonial::where('is_active', true)->get();
@@ -16,7 +15,6 @@ class TestimonialController extends Controller
         return response()->json($testimonials, 200);
     }
 
-    // Crear un nuevo testimonio
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -27,9 +25,7 @@ class TestimonialController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        $testimonial = new Testimonial();
-        $testimonial->fill($validated);
-        $testimonial->save();
+        $testimonial = Testimonial::create($validated);
 
         return response()->json([
             'message' => 'Testimonio creado exitosamente.',
@@ -37,13 +33,11 @@ class TestimonialController extends Controller
         ], 201);
     }
 
-    // Mostrar un testimonio específico
     public function show(Testimonial $testimonial)
     {
         return response()->json($testimonial, 200);
     }
 
-    // Actualizar un testimonio existente
     public function update(Request $request, Testimonial $testimonial)
     {
         $validated = $request->validate([
