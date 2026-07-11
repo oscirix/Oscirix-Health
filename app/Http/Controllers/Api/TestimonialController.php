@@ -25,6 +25,9 @@ class TestimonialController extends Controller
             'is_active' => 'boolean',
         ]);
 
+        // Asignamos el clinic_id requerido por la tabla de la base de datos
+        $validated['clinic_id'] = $request->user()->clinic_id;
+
         $testimonial = Testimonial::create($validated);
 
         return response()->json([
