@@ -15,10 +15,12 @@ use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\PatientDocumentController;
 use App\Http\Controllers\Api\PrescriptionController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TreatmentController;
 use App\Http\Controllers\Api\ClinicProfileController;
 use App\Http\Controllers\Api\TestimonialController;
+use App\Http\Controllers\Api\WorkHourController;
+
+use Illuminate\Support\Facades\Route;
 
 // ==========================================
 // 1. RUTAS PÚBLICAS (No requieren Login)
@@ -84,9 +86,11 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('appointments', AppointmentController::class)->only(['index', 'store', 'update']);
     Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
-    Route::put('clinic/settings', [ClinicSettingsController::class, 'update']);
+    Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
     Route::apiResource('treatments', TreatmentController::class);
 
     Route::apiResource('testimonials', TestimonialController::class);
+    Route::get('work-hours', [WorkHourController::class, 'index']);
+    Route::patch('work-hours/{workHour}', [WorkHourController::class, 'update']);
 
 });

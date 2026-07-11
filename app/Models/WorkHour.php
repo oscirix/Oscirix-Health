@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class WorkHour extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'work_hours';
 
     protected $guarded = [];
 }
-
