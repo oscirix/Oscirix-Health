@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClinicSetting extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'clinic_settings';
 
     protected $guarded = [];
 }
-
