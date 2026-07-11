@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'notifications';
 
     protected $guarded = [];
-}
 
+    // Opcional: Relación con el usuario destinatario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
