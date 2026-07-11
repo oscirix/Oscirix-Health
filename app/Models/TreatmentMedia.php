@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class TreatmentMedia extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'treatment_media';
 
     protected $guarded = [];
-}
 
+    // Opcional: Relación con el tratamiento
+    public function treatment()
+    {
+        return $this->belongsTo(Treatment::class);
+    }
+}

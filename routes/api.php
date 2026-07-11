@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\TreatmentController;
 use App\Http\Controllers\Api\ClinicProfileController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\WorkHourController;
+use App\Http\Controllers\Api\TreatmentMediaController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -92,5 +93,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::apiResource('testimonials', TestimonialController::class);
     Route::get('work-hours', [WorkHourController::class, 'index']);
     Route::patch('work-hours/{workHour}', [WorkHourController::class, 'update']);
+
+    Route::get('treatment-media', [TreatmentMediaController::class, 'index']);
+    Route::get('treatment-media/{treatmentMedia}', [TreatmentMediaController::class, 'show']);
 
 });
