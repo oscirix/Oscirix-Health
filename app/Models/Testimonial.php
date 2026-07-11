@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Testimonial extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids;
+
+    protected $table = 'testimonials';
 
     protected $guarded = [];
 }
-
