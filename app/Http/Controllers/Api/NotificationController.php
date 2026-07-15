@@ -26,6 +26,7 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'clinic_id' => 'required|string|size:36', // <-- Añadido aquí
             'user_id' => 'required|string|size:36',
             'patient_id' => 'nullable|string|size:36',
             'appointment_id' => 'nullable|string|size:36',
