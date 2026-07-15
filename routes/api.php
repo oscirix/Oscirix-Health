@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\WorkHourController;
 use App\Http\Controllers\Api\TreatmentMediaController;
 use App\Http\Controllers\Api\NotificationController;
 
+
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
@@ -49,11 +50,13 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('patients/{patient}/alerts', [PatientController::class, 'alerts']);
     Route::get('clinic-profile', [ClinicProfileController::class, 'show']);
     Route::put('clinic-profile', [ClinicProfileController::class, 'update']);
+
     Route::get('patients/{patient}/clinical-records', [ClinicalRecordController::class, 'index']);
     Route::post('patients/{patient}/clinical-records', [ClinicalRecordController::class, 'store']);
     Route::get('clinical-records/{clinical_record}', [ClinicalRecordController::class, 'show']);
     Route::patch('clinical-records/{clinical_record}', [ClinicalRecordController::class, 'update']);
     Route::post('clinical-records/{clinical_record}/close', [ClinicalRecordController::class, 'close']);
+    
     Route::get('clinical-records/{clinical_record}/anamnesis', [ClinicalRecordAnamnesisController::class, 'show']);
     Route::put('clinical-records/{clinical_record}/anamnesis', [ClinicalRecordAnamnesisController::class, 'upsert']);
     Route::get('clinical-records/{clinical_record}/clinical-exam', [ClinicalRecordExamController::class, 'show']);
@@ -85,6 +88,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('documents/{patient_document}/download', [PatientDocumentController::class, 'download']);
     Route::patch('documents/{patient_document}', [PatientDocumentController::class, 'update']);
     Route::delete('documents/{patient_document}', [PatientDocumentController::class, 'destroy']);
+
     Route::apiResource('appointments', AppointmentController::class)->only(['index', 'store', 'update']);
     Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
