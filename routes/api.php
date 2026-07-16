@@ -122,6 +122,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::put('clinical-records/{clinical_record}/dental-findings', [ClinicalRecordDentalFindingController::class, 'upsert']);
 
 
-    
+
 
 });
