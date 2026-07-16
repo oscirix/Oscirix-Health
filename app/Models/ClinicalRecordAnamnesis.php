@@ -11,6 +11,7 @@ class ClinicalRecordAnamnesis extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $table = 'clinical_record_anamnesis';
+
     protected $guarded = [];
 }
-
