@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\TreatmentMediaController;
 use App\Http\Controllers\Api\NotificationController;
 
 use App\Http\Controllers\Api\ClinicalRecordDentalFindingController;
+use App\Http\Controllers\Api\ClinicalRecordPeriodontalIndexController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -121,7 +122,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('clinical-records/{clinical_record}/dental-findings', [ClinicalRecordDentalFindingController::class, 'show']);
     Route::put('clinical-records/{clinical_record}/dental-findings', [ClinicalRecordDentalFindingController::class, 'upsert']);
 
-
+    Route::get('clinical-records/{clinical_record}/periodontal-indices', [ClinicalRecordPeriodontalIndexController::class, 'show']);
+    Route::put('clinical-records/{clinical_record}/periodontal-indices', [ClinicalRecordPeriodontalIndexController::class, 'storeOrUpdate']);
 
 
 });
