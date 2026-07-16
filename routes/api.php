@@ -29,6 +29,8 @@ use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanController;
 use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanStepController;
 use App\Http\Controllers\Api\ClinicalRecordVitalSignController;
 
+use App\Http\Controllers\Api\PatientAlertController;
+
 use App\Http\Controllers\Api\ExamFileController;
 
 use Illuminate\Support\Facades\Route;
@@ -163,5 +165,9 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('exam-requests/{exam_request}/files', [ExamFileController::class, 'store']);
     Route::delete('exam-files/{id}', [ExamFileController::class, 'destroy']);
 
+    // Rutas para las alertas de pacientes
+    Route::get('patients/{patient}/alerts', [PatientAlertController::class, 'index']);
+    Route::post('patients/{patient}/alerts', [PatientAlertController::class, 'store']);
+    Route::delete('patient-alerts/{id}', [PatientAlertController::class, 'destroy']);
 
 });
