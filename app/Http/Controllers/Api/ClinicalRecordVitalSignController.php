@@ -40,7 +40,6 @@ class ClinicalRecordVitalSignController extends Controller
             'temperature_c' => $validated['temperature_c'] ?? null,
             'oxygen_saturation_percent' => $validated['oxygen_saturation_percent'] ?? null,
             'measured_at' => $validated['measured_at'],
-            'created_by' => $request->user() ? $request->user()->id : null,
         ]);
 
         return response()->json([
