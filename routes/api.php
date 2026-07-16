@@ -32,6 +32,7 @@ use App\Http\Controllers\Api\ClinicalRecordVitalSignController;
 use App\Http\Controllers\Api\PatientAlertController;
 use App\Http\Controllers\Api\PatientAllergyController;
 use App\Http\Controllers\Api\PatientHabitController;
+use App\Http\Controllers\Api\PatientMedicalConditionController;
 
 use App\Http\Controllers\Api\ExamFileController;
 
@@ -182,5 +183,11 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('patients/{patient}/habits', [PatientHabitController::class, 'index']);
     Route::post('patients/{patient}/habits', [PatientHabitController::class, 'store']);
     Route::delete('patient-habits/{id}', [PatientHabitController::class, 'destroy']);
+
+    // Rutas para las condiciones médicas de pacientes
+    Route::get('patients/{patient}/medical-conditions', [PatientMedicalConditionController::class, 'index']);
+    Route::post('patients/{patient}/medical-conditions', [PatientMedicalConditionController::class, 'store']);
+    Route::delete('patient-medical-conditions/{id}', [PatientMedicalConditionController::class, 'destroy']);
+
 
 });
