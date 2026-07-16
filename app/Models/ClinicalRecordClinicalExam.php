@@ -11,6 +11,7 @@ class ClinicalRecordClinicalExam extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $table = 'clinical_record_clinical_exams';
+
     protected $guarded = [];
 }
-
