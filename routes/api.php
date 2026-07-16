@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\WorkHourController;
 use App\Http\Controllers\Api\TreatmentMediaController;
 use App\Http\Controllers\Api\NotificationController;
 
+use App\Http\Controllers\Api\ClinicalRecordDentalFindingController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -65,7 +67,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('clinical-records/{clinical_record}/odontogram', [ClinicalRecordOdontogramController::class, 'index']);
     Route::post('clinical-records/{clinical_record}/odontogram', [ClinicalRecordOdontogramController::class, 'store']);
-
     Route::patch('odontogram-items/{odontogram_item}', [ClinicalRecordOdontogramController::class, 'update']);
     Route::delete('odontogram-items/{odontogram_item}', [ClinicalRecordOdontogramController::class, 'destroy']);
 
@@ -89,7 +90,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::patch('exams/{exam_request}/result', [ExamRequestController::class, 'updateResult']);
     Route::post('exams/{exam_request}/files', [ExamRequestController::class, 'storeFile']);
     Route::get('exam-files/{exam_file}/download', [ExamRequestController::class, 'downloadFile']);
-    
+
     Route::get('clinical-records/{clinical_record}/documents', [PatientDocumentController::class, 'indexByClinicalRecord']);
     Route::get('patients/{patient}/documents', [PatientDocumentController::class, 'indexByPatient']);
     Route::post('patients/{patient}/documents', [PatientDocumentController::class, 'store']);
@@ -98,13 +99,17 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::delete('documents/{patient_document}', [PatientDocumentController::class, 'destroy']);
 
     Route::apiResource('appointments', AppointmentController::class)->only(['index', 'store', 'update']);
+
     Route::apiResource('leads', LeadController::class)->only(['index', 'store', 'update']);
+
     Route::get('clinic/settings', [ClinicSettingsController::class, 'show']);
     Route::patch('clinic/settings', [ClinicSettingsController::class, 'update']);
+
     Route::apiResource('treatments', TreatmentController::class);
 
     //Nuevas rutas
     Route::apiResource('testimonials', TestimonialController::class);
+
     Route::get('work-hours', [WorkHourController::class, 'index']);
     Route::patch('work-hours/{workHour}', [WorkHourController::class, 'update']);
 
@@ -112,5 +117,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('treatment-media/{treatmentMedia}', [TreatmentMediaController::class, 'show']);
 
     Route::apiResource('notifications', NotificationController::class);
+
+    Route::get('clinical-records/{clinical_record}/dental-findings', [ClinicalRecordDentalFindingController::class, 'show']);
+    Route::put('clinical-records/{clinical_record}/dental-findings', [ClinicalRecordDentalFindingController::class, 'upsert']);
 
 });
