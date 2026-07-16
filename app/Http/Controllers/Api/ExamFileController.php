@@ -5,19 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ExamFile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ExamFileController extends Controller
 {
-    public function index($examRequestId)
-    {
-        $files = ExamFile::where('exam_request_id', $examRequestId)->get();
-
-        return response()->json([
-            'exam_files' => $files
-        ], 200);
-    }
-
+    // Método para subir el archivo (si prefieres tenerlo aquí en lugar del ExamRequestController)
     public function store(Request $request, $examRequestId)
     {
         $request->validate([
@@ -30,11 +22,10 @@ class ExamFileController extends Controller
         $mimeType = $uploadedFile->getMimeType();
         $sizeKb = round($uploadedFile->getSize() / 1024);
 
-        // Guardar el archivo en storage/app/public/exam-files
         $path = $uploadedFile->store('exam-files', 'public');
 
         $examFile = ExamFile::create([
-            'id' => (string) Str::uuid(),
+            'id' => (string) \Illuminate\Support\Str::uuid(),
             'exam_request_id' => $examRequestId,
             'file_path' => $path,
             'file_name' => $originalName,
@@ -50,19 +41,35 @@ class ExamFileController extends Controller
         ], 201);
     }
 
-    /*public function destroy($id)
+    // Método para descargar el archivo usando su ID específico
+    public function download($id)
     {
         $examFile = ExamFile::findOrFail($id);
-        
-        // Opcional: eliminar el archivo físico del storage si existe
-        if (\Storage::disk('public')->exists($examFile->file_path)) {
-            \Storage::disk('public')->delete($examFile->file_path);
+
+        $fullPath = storage_path('app/public/' . $examFile->file_path);
+
+        if (!file_exists($fullPath)) {
+            return response()->json(['message' => 'El archivo físico no existe en el servidor.'], 404);
         }
 
+        return response()->download($fullPath, $examFile->file_name);
+    }
+
+    // Método para eliminar un archivo si ya no se necesita
+    public function destroy($id)
+    {
+        $examFile = ExamFile::findOrFail($id);
+
+        // Borrar el archivo físico del storage si existe
+        if (Storage::disk('public')->exists($examFile->file_path)) {
+            Storage::disk('public')->delete($examFile->file_path);
+        }
+
+        // Borrar el registro de la base de datos
         $examFile->delete();
 
         return response()->json([
-            'message' => 'Archivo de examen eliminado exitosamente.'
+            'message' => 'Archivo eliminado exitosamente.'
         ], 200);
-    }*/
+    }
 }
