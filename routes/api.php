@@ -29,6 +29,8 @@ use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanController;
 use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanStepController;
 use App\Http\Controllers\Api\ClinicalRecordVitalSignController;
 
+use App\Http\Controllers\Api\ExamFileController;
+
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
@@ -90,6 +92,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('clinical-records/{clinical_record}/exams', [ExamRequestController::class, 'index']);
     Route::post('clinical-records/{clinical_record}/exams', [ExamRequestController::class, 'store']);
+
     Route::get('exams/{exam_request}', [ExamRequestController::class, 'show']);
     Route::patch('exams/{exam_request}/result', [ExamRequestController::class, 'updateResult']);
     Route::post('exams/{exam_request}/files', [ExamRequestController::class, 'storeFile']);
@@ -140,6 +143,11 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('clinical-records/{clinical_record}/vital-signs', [ClinicalRecordVitalSignController::class, 'index']);
     Route::post('clinical-records/{clinical_record}/vital-signs', [ClinicalRecordVitalSignController::class, 'store']);
     Route::delete('vital-signs/{id}', [ClinicalRecordVitalSignController::class, 'destroy']);
+
+    
+    Route::get('exam-requests/{exam_request}/files', [ExamFileController::class, 'index']);
+    Route::post('exam-requests/{exam_request}/files', [ExamFileController::class, 'store']);
+    Route::delete('exam-files/{id}', [ExamFileController::class, 'destroy']);
 
 
 });
