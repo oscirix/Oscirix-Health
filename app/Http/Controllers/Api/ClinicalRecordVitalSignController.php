@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\ClinicalRecordVitalSign;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ClinicalRecordVitalSignController extends Controller
 {
@@ -31,6 +32,7 @@ class ClinicalRecordVitalSignController extends Controller
         ]);
 
         $vitalSign = ClinicalRecordVitalSign::create([
+            'id' => (string) Str::uuid(),
             'clinical_record_id' => $clinicalRecordId,
             'blood_pressure' => $validated['blood_pressure'] ?? null,
             'heart_rate' => $validated['heart_rate'] ?? null,
@@ -38,6 +40,7 @@ class ClinicalRecordVitalSignController extends Controller
             'temperature_c' => $validated['temperature_c'] ?? null,
             'oxygen_saturation_percent' => $validated['oxygen_saturation_percent'] ?? null,
             'measured_at' => $validated['measured_at'],
+            'created_by' => $request->user() ? $request->user()->id : null,
         ]);
 
         return response()->json([
