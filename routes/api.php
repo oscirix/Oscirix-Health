@@ -95,11 +95,22 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('exams', [ExamRequestController::class, 'index']);
     Route::post('exams', [ExamRequestController::class, 'store']);
-    
-    Route::get('exams/{exam_request}', [ExamRequestController::class, 'show']);
+
+    /*Route::get('exams/{exam_request}', [ExamRequestController::class, 'show']);
     Route::patch('exams/{exam_request}/result', [ExamRequestController::class, 'updateResult']);
     Route::post('exams/{exam_request}/files', [ExamRequestController::class, 'storeFile']);
     Route::get('exam-files/{exam_file}/download', [ExamRequestController::class, 'downloadFile']);
+    */
+
+    // Subir archivo a una solicitud específica
+    Route::post('exams/{exam_request}/files', [ExamFileController::class, 'store']);
+
+    // Descargar un archivo por su ID
+    Route::get('exam-files/{exam_file}/download', [ExamFileController::class, 'download']);
+
+    // Borrar un archivo por su ID
+    Route::delete('exam-files/{exam_file}', [ExamFileController::class, 'destroy']);
+
 
     Route::get('clinical-records/{clinical_record}/documents', [PatientDocumentController::class, 'indexByClinicalRecord']);
     Route::get('patients/{patient}/documents', [PatientDocumentController::class, 'indexByPatient']);
