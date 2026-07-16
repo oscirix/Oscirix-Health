@@ -92,6 +92,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('clinical-records/{clinical_record}/prescriptions', [PrescriptionController::class, 'index']);
     Route::post('clinical-records/{clinical_record}/prescriptions', [PrescriptionController::class, 'store']);
+
+
     Route::get('prescriptions/{prescription}', [PrescriptionController::class, 'show']);
     Route::get('prescriptions/{prescription}/pdf', [PrescriptionController::class, 'pdf']);
     Route::patch('prescriptions/{prescription}/status', [PrescriptionController::class, 'updateStatus']);
@@ -188,6 +190,14 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('patients/{patient}/medical-conditions', [PatientMedicalConditionController::class, 'index']);
     Route::post('patients/{patient}/medical-conditions', [PatientMedicalConditionController::class, 'store']);
     Route::delete('patient-medical-conditions/{id}', [PatientMedicalConditionController::class, 'destroy']);
+
+    // Rutas para las recetas médicas
+    Route::get('patients/{patient}/prescriptions', [PrescriptionController::class, 'index']);
+    Route::post('patients/{patient}/prescriptions', [PrescriptionController::class, 'store']);
+    Route::get('prescriptions/{id}', [PrescriptionController::class, 'show']);
+    Route::patch('prescriptions/{id}/status', [PrescriptionController::class, 'updateStatus']);
+
+    
 
 
 });
