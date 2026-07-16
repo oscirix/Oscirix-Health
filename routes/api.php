@@ -93,6 +93,9 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('clinical-records/{clinical_record}/exams', [ExamRequestController::class, 'index']);
     Route::post('clinical-records/{clinical_record}/exams', [ExamRequestController::class, 'store']);
 
+    Route::get('exams', [ExamRequestController::class, 'index']);
+    Route::post('exams', [ExamRequestController::class, 'store']);
+    
     Route::get('exams/{exam_request}', [ExamRequestController::class, 'show']);
     Route::patch('exams/{exam_request}/result', [ExamRequestController::class, 'updateResult']);
     Route::post('exams/{exam_request}/files', [ExamRequestController::class, 'storeFile']);
