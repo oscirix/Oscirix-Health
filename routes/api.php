@@ -27,7 +27,7 @@ use App\Http\Controllers\Api\ClinicalRecordPeriodontalIndexController;
 use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanController;
 
 use App\Http\Controllers\Api\ClinicalRecordTreatmentPlanStepController;
-
+use App\Http\Controllers\Api\ClinicalRecordVitalSignController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -136,5 +136,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('treatment-plans/{treatment_plan}/steps', [ClinicalRecordTreatmentPlanStepController::class, 'store']);
     Route::patch('treatment-plan-steps/{id}', [ClinicalRecordTreatmentPlanStepController::class, 'update']);
     Route::delete('treatment-plan-steps/{id}', [ClinicalRecordTreatmentPlanStepController::class, 'destroy']);
+
+    Route::get('clinical-records/{clinical_record}/vital-signs', [ClinicalRecordVitalSignController::class, 'index']);
+    Route::post('clinical-records/{clinical_record}/vital-signs', [ClinicalRecordVitalSignController::class, 'store']);
+    Route::delete('vital-signs/{id}', [ClinicalRecordVitalSignController::class, 'destroy']);
+
 
 });
