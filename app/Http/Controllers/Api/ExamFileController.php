@@ -9,7 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ExamFileController extends Controller
 {
-    // Método para subir el archivo (si prefieres tenerlo aquí en lugar del ExamRequestController)
+    public function index($examRequestId)
+    {
+        $files = ExamFile::where('exam_request_id', $examRequestId)->get();
+
+        return response()->json([
+            'exam_files' => $files
+        ], 200);
+    }
+
+
     public function store(Request $request, $examRequestId)
     {
         $request->validate([
