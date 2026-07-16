@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\ClinicalRecordVitalSignController;
 
 use App\Http\Controllers\Api\PatientAlertController;
 use App\Http\Controllers\Api\PatientAllergyController;
+use App\Http\Controllers\Api\PatientHabitController;
 
 use App\Http\Controllers\Api\ExamFileController;
 
@@ -56,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     // Toda la lógica médica protegida del sistema
     Route::get('dashboard/summary', [DashboardController::class, 'summary']);
+
     Route::apiResource('patients', PatientController::class)->only(['index', 'store', 'show', 'update']);
     Route::get('patients/{patient}/summary', [PatientController::class, 'summary']);
     Route::get('patients/{patient}/alerts', [PatientController::class, 'alerts']);
@@ -175,5 +177,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('patients/{patient}/allergies', [PatientAllergyController::class, 'index']);
     Route::post('patients/{patient}/allergies', [PatientAllergyController::class, 'store']);
     Route::delete('patient-allergies/{id}', [PatientAllergyController::class, 'destroy']);
+
+    // Rutas para los hábitos de pacientes
+    Route::get('patients/{patient}/habits', [PatientHabitController::class, 'index']);
+    Route::post('patients/{patient}/habits', [PatientHabitController::class, 'store']);
+    Route::delete('patient-habits/{id}', [PatientHabitController::class, 'destroy']);
 
 });
