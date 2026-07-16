@@ -12,5 +12,10 @@ class ExamRequest extends Model
     use HasUuids;
 
     protected $guarded = [];
+    // Añade esta relación
+    public function files()
+    {
+        return $this->hasMany(ExamFile::class, 'exam_request_id');
+    }
 }
 
